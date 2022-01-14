@@ -20,6 +20,8 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.22'
     // https://mvnrepository.com/artifact/commons-codec/commons-codec
     implementation 'commons-codec:commons-codec:1.15'
+    // https://mvnrepository.com/artifact/com.auth0/java-jwt
+    implementation 'com.auth0:java-jwt:3.18.2'
 
     runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

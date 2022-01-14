@@ -1,4 +1,4 @@
-package com.project.jwtspringsec.model;
+package com.project.jwtspringsec.usuario.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

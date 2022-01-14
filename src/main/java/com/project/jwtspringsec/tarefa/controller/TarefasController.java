@@ -1,24 +1,27 @@
-package com.project.jwtspringsec.controller;
+package com.project.jwtspringsec.tarefa.controller;
 
-import com.project.jwtspringsec.dto.NovaTarefaDTO;
-import com.project.jwtspringsec.dto.TarefaDetalhadaDTO;
-import com.project.jwtspringsec.dto.TarefasDTO;
-import com.project.jwtspringsec.exception.AcessoNegadoException;
-import com.project.jwtspringsec.model.Tarefa;
-import com.project.jwtspringsec.model.Usuario;
-import com.project.jwtspringsec.repositories.TarefaRepository;
-import com.project.jwtspringsec.repositories.UsuarioRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestAttribute;
 
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.project.jwtspringsec.tarefa.dto.NovaTarefaDTO;
+import com.project.jwtspringsec.tarefa.dto.TarefaDetalhadaDTO;
+import com.project.jwtspringsec.tarefa.dto.TarefasDTO;
+import com.project.jwtspringsec.tarefa.exception.AcessoNegadoException;
+import com.project.jwtspringsec.tarefa.model.Tarefa;
+import com.project.jwtspringsec.usuario.model.Usuario;
+import com.project.jwtspringsec.tarefa.repository.TarefaRepository;
+import com.project.jwtspringsec.usuario.repository.UsuarioRepository;
 
 @RestController
 @RequestMapping("api/tarefas")
@@ -34,8 +37,9 @@ public class TarefasController {
     }
 
     @GetMapping
-    public List<TarefasDTO> buscarTodas(HttpSession session){
-        Usuario usuario = getUsuarioLogado(session);
+    public List<TarefasDTO> buscarTodas(Principal principal){
+        String loginUsuario = principal.getName();
+        Usuario usuario = this.usuarioRepository.findByLogin(loginUsuario).get();
 
         return this.tarefaRepository.findByUsuario(usuario)
                 .stream()
@@ -44,11 +48,12 @@ public class TarefasController {
     }
 
     @GetMapping("/{id}")
-    public TarefaDetalhadaDTO buscarPorId(@PathVariable("id") Integer id, HttpSession session) throws AcessoNegadoException {
+    public TarefaDetalhadaDTO buscarPorId(@PathVariable("id") Integer id, Principal principal) throws AcessoNegadoException {
+        String loginUsuario = principal.getName();
+        Usuario usuario = this.usuarioRepository.findByLogin(loginUsuario).get();
         Tarefa tarefa = this.tarefaRepository.findById(id).get();
-        Integer idUsuarioLogado = (Integer) session.getAttribute("idUsuarioLogado");
 
-        if(!tarefa.getUsuario().getId().equals(idUsuarioLogado)){
+        if(!tarefa.getUsuario().getId().equals(usuario.getId())){
             throw new AcessoNegadoException();
         }
 
@@ -56,8 +61,9 @@ public class TarefasController {
     }
 
     @PostMapping
-    public void cadastrar(@RequestBody NovaTarefaDTO tarefa, HttpSession session){
-        Usuario usuario = getUsuarioLogado(session);
+    public void cadastrar(@RequestBody NovaTarefaDTO tarefa, Principal principal){
+        String loginUsuario = principal.getName();
+        Usuario usuario = this.usuarioRepository.findByLogin(loginUsuario).get();
         Tarefa entidade = new Tarefa();
         entidade.setUsuario(usuario);
         entidade.setDescricao(tarefa.getDescricao());

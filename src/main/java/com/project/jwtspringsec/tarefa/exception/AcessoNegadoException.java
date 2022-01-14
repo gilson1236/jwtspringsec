@@ -1,4 +1,4 @@
-package com.project.jwtspringsec.exception;
+package com.project.jwtspringsec.tarefa.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

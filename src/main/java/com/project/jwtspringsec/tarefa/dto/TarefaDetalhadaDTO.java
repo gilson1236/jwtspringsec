@@ -1,6 +1,6 @@
-package com.project.jwtspringsec.dto;
+package com.project.jwtspringsec.tarefa.dto;
 
-import com.project.jwtspringsec.model.Tarefa;
+import com.project.jwtspringsec.tarefa.model.Tarefa;
 
 import lombok.Builder;
 import lombok.Data;

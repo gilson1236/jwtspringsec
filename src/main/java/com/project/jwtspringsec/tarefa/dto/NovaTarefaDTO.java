@@ -1,4 +1,4 @@
-package com.project.jwtspringsec.dto;
+package com.project.jwtspringsec.tarefa.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

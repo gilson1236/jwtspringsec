@@ -1,4 +1,4 @@
-package com.project.jwtspringsec.login;
+package com.project.jwtspringsec.login.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

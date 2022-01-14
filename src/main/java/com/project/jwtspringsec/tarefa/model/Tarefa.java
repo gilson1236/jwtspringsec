@@ -1,5 +1,6 @@
-package com.project.jwtspringsec.model;
+package com.project.jwtspringsec.tarefa.model;
 
+import com.project.jwtspringsec.usuario.model.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

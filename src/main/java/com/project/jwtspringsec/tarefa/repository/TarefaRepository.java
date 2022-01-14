@@ -1,7 +1,7 @@
-package com.project.jwtspringsec.repositories;
+package com.project.jwtspringsec.tarefa.repository;
 
-import com.project.jwtspringsec.model.Tarefa;
-import com.project.jwtspringsec.model.Usuario;
+import com.project.jwtspringsec.tarefa.model.Tarefa;
+import com.project.jwtspringsec.usuario.model.Usuario;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

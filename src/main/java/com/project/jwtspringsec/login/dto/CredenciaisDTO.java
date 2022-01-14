@@ -1,4 +1,4 @@
-package com.project.jwtspringsec.login;
+package com.project.jwtspringsec.login.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
